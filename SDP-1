@@ -1,0 +1,70 @@
+int paddle1Y = 250;
+int paddle2Y = 250;
+int paddleWidth = 20;
+int paddleHeight = 100;
+int paddleSpeed = 5; 
+
+float ballX = 400;
+float ballY = 300;
+float ballSpeedX = 3;
+float ballSpeedY = 3;
+int ballSize = 20;
+
+boolean paddle1Up = false;
+boolean paddle1Down = false;
+boolean paddle2Up = false;
+boolean paddle2Down = false;
+
+void setup() {
+  size(800, 600);  
+}
+
+void draw() {
+  background(0);  
+
+  fill(255);  
+  rect(30, paddle1Y, paddleWidth, paddleHeight);  
+  rect(width - 50, paddle2Y, paddleWidth, paddleHeight);  
+
+  if (paddle1Up) {
+    paddle1Y -= paddleSpeed;  
+  }
+  if (paddle1Down) {
+    paddle1Y += paddleSpeed;  
+  }
+
+  if (paddle2Up) {
+    paddle2Y -= paddleSpeed;  
+  }
+  if (paddle2Down) {
+    paddle2Y += paddleSpeed;  
+  }
+
+  ellipse(ballX, ballY, ballSize, ballSize);
+
+  ballX += ballSpeedX;
+  ballY += ballSpeedY;
+
+  if (ballY < 0 || ballY > height - ballSize) {
+    ballSpeedY *= -1;  
+  }
+
+  if (ballX < 50 && ballY > paddle1Y && ballY < paddle1Y + paddleHeight) {
+    ballSpeedX *= -1;  
+  }
+  
+  if (ballX > width - 50 - ballSize && ballY > paddle2Y && ballY < paddle2Y + paddleHeight) {
+    ballSpeedX *= -1;  
+  }
+
+  if (ballX < 0 || ballX > width) {
+    resetBall();
+  }
+}
+
+void resetBall() {
+  ballX = width / 2;
+  ballY = height / 2;
+  ballSpeedX = 3;
+  ballSpeedY = 3;
+}
