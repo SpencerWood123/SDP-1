@@ -34,6 +34,8 @@ void draw() {
   }
 
   if (paddle2Up) {
+
+
     paddle2Y -= paddleSpeed;  
   }
   if (paddle2Down) {
@@ -68,3 +70,45 @@ void resetBall() {
   ballSpeedX = 3;
   ballSpeedY = 3;
 }
+
+if (ballX < 0 || ballX > width) {
+    resetBall();
+}
+
+function resetBall() {
+    ballX = width / 2;
+    ballY = height / 2;
+    ballSpeedX = 3;
+    ballSpeedY = 3;
+}
+
+function keyPressed() {
+    if (key === 'w') {
+        paddle1Up = true;
+    }
+    if (key === 's') {
+        paddle1Down = true;
+    }
+    if (keyCode === UP_ARROW) {
+        paddle2Up = true;
+    }
+    if (keyCode === DOWN_ARROW) {
+        paddle2Down = true;
+    }
+}
+
+function keyReleased() {
+    if (key === 'w') {
+        paddle1Up = false;
+    }
+    if (key === 's') {
+        paddle1Down = false;
+    }
+    if (keyCode === UP_ARROW) {
+        paddle2Up = false;
+    }
+    if (keyCode === DOWN_ARROW) {
+        paddle2Down = false;
+    }
+}
+
